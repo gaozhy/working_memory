@@ -220,6 +220,10 @@ def prep_cont(line, pos, height,color):
     line_text = visual.TextStim(win,line,color=color,pos = pos,height = height)
     return line_text
 
+def prep_fix1():
+    draw_fix1 = visual.DotStim(win,units='pix',elementMask='circle',xys=pos,color=(1,1,1),size=20)
+    return draw_fix1
+
 
 # prepare the content on the screen - pictures
 # create an image stimulus for presenting the images in
@@ -318,7 +322,7 @@ def run_stimuli(stimuli_file):
           
         # prepare fixation, clue, probe and target for dispaly
         
-        fix  = prep_cont('+',fix_pos,text_h,win_text_col)
+        fix  = prep_fix1()
         fix2 = prep_cont('+',fix_pos,text_h,color = (1,0.5,0))
         probe = prep_cont(trial['probe'],probe_pos,text_h,win_text_col)
         target = prep_cont(trial['target'],target_pos,text_h,win_text_col)
