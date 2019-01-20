@@ -1,0 +1,269 @@
+Trial_ID,probe,target,Association_Strength
+1,dough,barbeque,
+2,shed,spade,4.517241379
+3,soldier,rifle,5.793103448
+4,radio,vinyl,2.896551724
+5,canyon,elf,0
+6,mirror,lipstick,4.068965517
+7,lorry, highway,7
+8,sea,hand,
+9,cottage,thigh,0
+10,clown,cliff,0
+11,blazer,foal,0
+12,bath,bleach,
+13,veil,bride,6
+14,icecream,flake,5.448275862
+15,pike,river,4.137931034
+16,suit,tailor,5.75862069
+17,oven, blister,4
+18,belt,buckle,
+19,builder,bricks,5.862068966
+20,swing,ropes,4.482758621
+21,pram,baby,6.206896552
+22,lager, lime,4.5
+23,bookmark,page,
+24,rhinoceros,rug,0
+25,stapler,mallet,
+26,submarine ,diver,
+27,wool, album,0
+28,wheat,trophy,0
+29,wicker,oxen,
+30,dart,clover,0.172413793
+31,cleaver,coffee,
+32,firefighter,hose,
+33,aeroplane,compass,3.103448276
+34,handcuffs,birch,
+35,dove,trainer,
+36,compost,daffodils,
+37,teacher,protractor,
+38,bible,nun,
+39,bench,football,
+40,hanger,policeman,
+41,eardrop,bacteria,
+42,arrow,pineapple,0
+43,pail,container,3.655172414
+44,microbes,pillow,
+45,needle,ink,2.482758621
+46,belt,vest,
+47,juice,sand,
+48,newt,lightning,0
+49,zebra, jacket,0.172413793
+50,vinegar,bone,0.034482759
+51,circus,beard,
+52,portrait,cargo,0.103448276
+53,pasta,potatoes,3.551724138
+54,paramedic,ambulance,
+55,willow,tongue,
+56,forge,blacksmith,5.034482759
+57,volcano ,lava,
+58,ashes,lake,
+59,bell,lotus,
+60,albatross,uniform,0
+61,lemonade,straw,
+62,prune,poker,0
+63,deer,thumb,0.103448276
+64,rabbi, synagogue,
+65,kiwi,locker,0
+66,trolley,lollipop,
+67,washer,lily,
+68,coal,chimney,5.862068966
+69,flapjack,raisin,4.344827586
+70,television,root,0
+71,floodplain,goat,
+72,cactus,desert,5.965517241
+73,lavender,wig,0.034482759
+74,farmyard,sergeant,0
+75,farm,sheep,5.862068966
+76,church,vicar,6.344827586
+77,eraser,lead,2.862068966
+78,bow,tie,6.137931034
+79,funeral,candle,3.206896552
+80,painkiller,mouth,
+81,handgel,doctor,
+82,waitress, restaurant,7
+83,omelette,pepper,
+84,bait,fishhook,5.827586207
+85,bolt,robbery,
+86,iron,sheet,
+87,confetti,helium,1.827586207
+88,coasters,bowl,
+89,seat,grapefruit,0
+90,car,mechanic,5.965517241
+91,seagulls,keyboard,
+92,soil,tree,4
+93,tractor,hay,5.068965517
+94,javelin,kettle,
+95,fire,forest,
+96,cod,pen,0
+97,refrigerator,jam,
+98,zipper,trousers,
+99,mop,skin,0.137931034
+100,ashtray, cigarette,6.875
+101,baggage,shoulder,
+102,sink,filter,2.206896552
+103,robot,wires,
+104,earlobe,earing ,
+105,dirt,gravestone,
+106,crocodile,velcro,
+107,tea,mug,6.206896552
+108,wing,walnut,
+109,felt ,stencil,
+110,flask,gin,4.379310345
+111,barn, rat,4.375
+112,deity,invocation,2.206896552
+113,pipe,bear,
+114,rollerskates,pathway,
+115,lobster, butter,4.125
+116,tornado,pup,0.172413793
+117,rocket ,space,
+118,thunder,coast,
+119,shrew,grate,0.137931034
+120,drosophila,earring,
+121,goggles,towel,
+122,cloth,dish,
+123,suitcase,bikini,2.827586207
+124,worker,construction,5.137931034
+125,hippocampus,saloon,
+126,oxygen,tank,
+127,penicillin ,draws,
+128,python, tree,4.375
+129,rain,mitten,
+130,frame,picture,5.793103448
+131,theatre,costume,5.620689655
+132,mould,piano,0.034482759
+133,apron,serviette,1.862068966
+134,dishwasher,colander,
+135,damp,plug,
+136,muscle,bandage ,
+137,veal,salad,
+138,factory,cardboard,
+139,meadow,mouse,3.413793103
+140,questionnaire,tablet,
+141,shop,basket,5.827586207
+142,batteries,console,
+143,toothbrush,mouthwash,
+144,jug, water,6.875
+145,pulpit,pastor,3.896551724
+146,trench,choir,0.034482759
+147,blender,strawberries,
+148,duster,tiles,
+149,curtain,kitchen,4
+150,chalk,painting,2.931034483
+151,soup,peas,3.357142857
+152,screws,screwdriver,
+153,book,author,6.379310345
+154,podium,gymnast,
+155,spacecraft,astronaut,6.068965517
+156,canvas,wall,
+157,rocks,seaside,5.206896552
+158,antique,museum,5.172413793
+159,turban,cedar,0
+160,platform,toothpaste,0.068965517
+161,gun,bullet,
+162,sandpaper,nails,2.275862069
+163,aquifer,turtle,
+164,bread,toaster,6.103448276
+165,plaster,library,
+166,sandal,beach,5.482758621
+167,receipt,bag,2.724137931
+168,rings,diamonds,5.827586207
+169,cot,pacifier,4.275862069
+170,helmet, miner,7
+171,coast,pebbles ,
+172,basketball,dessert,
+173,barber,shears,4.75862069
+174,jail,tattoo,4
+175,ear,fence,0.068965517
+176,archery,bruise,
+177,earphone,handwriting,
+178,armoury,blade,4.586206897
+179,leopard,zoo,5.275862069
+180,beef,herbs,
+181,risotto,rice,6.206896552
+182,thermostat,mercury,
+183,office,plant,
+184,taxi,blossom,0
+185,hoover,cupboard,4
+186,thread, stitch,7
+187,paddle,kayak,
+188,digit,watch,
+189,laminator,sellotape,
+190,curb,streetlight,
+191,hollywood,labour,
+192,lace,wedding,4.344827586
+193,porch,motorboat,0.103448276
+194,warehouse,pallet,3.862068966
+195,headphones,telephone,2.931034483
+196,carrot,horse,
+197,rattle,castanets,2.379310345
+198,phone,harbour,0.034482759
+199,syrup,ankle,0
+200,scales,weights,5.310344828
+201,worm,pear,
+202,cork,screw,5.965517241
+203,baseball,bat,6.172413793
+204,squirrel,woodland,5.344827586
+205,diamond,eyeball,0.172413793
+206,hair,brush,6.413793103
+207,bracelet,flea,0
+208,judge,gavel,
+209,campervan,graffiti,
+210,film, popcorn,7
+211,pram, baby,7
+212,chisel,stroke,
+213,cinema,screen,
+214,spider, web,
+215,vault,ewe,0
+216,menu,meal,5.724137931
+217,ferry,engine,4
+218,clay,wheel,
+219,garden,flower,5.931034483
+220,crochet,thimble,2.068965517
+221,calculator,notebook,
+222,flag,lettuce,0
+223,bed,duvet,
+224,jungle,monkey,5.571428571
+225,butterfly,bulb,
+226,university,pig,0.034482759
+227,bedroom, dresser,6.75
+228,hairband,dryer,
+229,jeweller,necklace,5.896551724
+230,cavity,bucket,
+231,reed,marsh,4.689655172
+232,owl,barn,5
+233,carriage,princess,
+234,runner,cup,2.172413793
+235,monarch,throne,5.965517241
+236,shovel,hole,5.689655172
+237,firework,lighter,4.206896552
+238,president,sovereign,3.321428571
+239,mud,harvester,2.275862069
+240,orange,violin,
+241,cocktail,bar,6.034482759
+242,boot,trail,2
+243,flat,staircase,1.965517241
+244,peacock,typhoon,0
+245,printer,trumpet,0
+246,salt,jellyfish,1.931034483
+247,apple,orchard,6.103448276
+248,pumpkin, halloween,
+249,cloud,grass,
+250,toilet,sponge,
+251,hotel, guest,6.875
+252,cheese,wire,
+253,warrant,detective,4.428571429
+254,biologist,lab,5.931034483
+255,hymn, organ,6.375
+256,roach,fat,
+257,pot,hat,
+258,keys,passport,
+259,antelope,capsule,0
+260,bib, porridge,4.625
+261,pin,fog,
+262,bandana,bamboo,0.172413793
+263,wood,mountain,2.620689655
+264,train,spanner,
+265,house,pan,3.034482759
+266,kangaroo,aerial,0.034482759
+267,brain,ocean,0.068965517
+268,grill, sausage,6.875

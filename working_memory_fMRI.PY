@@ -36,7 +36,7 @@ trigger_figure = 'trigger.png'
 ready_figure = 'ready.png'
 expName = 'Workingmemory'  # the experiment name
 data_folder = 'beh_results'  # make a directory to store data
-stimuli_name = 'working_memory_stim_run'
+stimuli_name = 'sem_stim_run'
 
 # assign the monitor name                                                                                                                                                                                                                                          
 monitor_name = 'HP ProOne 600'
@@ -221,7 +221,7 @@ def prep_cont(line, pos, height,color):
     return line_text
 
 def prep_fix1():
-    draw_fix1 = visual.DotStim(win,units='pix',elementMask='circle',xys=pos,color=(1,1,1),size=20)
+    draw_fix1=visual.Circle(win,units='pix',radius=30,fillColor=[0,0,0],lineColor=[0,0,0])
     return draw_fix1
 
 
@@ -323,7 +323,7 @@ def run_stimuli(stimuli_file):
         # prepare fixation, clue, probe and target for dispaly
         
         fix  = prep_fix1()
-        fix2 = prep_cont('+',fix_pos,text_h,color = (1,0.5,0))
+        fix2 = prep_cont('+',fix_pos,text_h,color = (-1,-1,-1))
         probe = prep_cont(trial['probe'],probe_pos,text_h,win_text_col)
         target = prep_cont(trial['target'],target_pos,text_h,win_text_col)
         yes   = prep_cont('Y',yes_pos,yes_no_h,win_text_col)
@@ -356,15 +356,36 @@ def run_stimuli(stimuli_file):
         event.clearEvents()
         target_onset = win.flip()
 
-        keys = event.waitKeys(maxWait = timelimit_deci, keyList =['1','2','escape'],timeStamped = True)
+        keys = event.waitKeys(maxWait = target_durat, keyList =['1','2','escape'],timeStamped = True)
         
-
+        yes.draw()
+        no.draw()
+        time_after_targ=target_onset+target_durat
+        while core.monotonicClock.getTime()<(time_after_targ-1/120.0):
+            pass
+        after_targ=win.flip()
+        
+        
         # If subjects do not press the key within maxwait time, RT is the timilimit and key is none and it is false
         if keys is None:
-            RT = 'None'
-            keypress = 'None'
+            keys = event.waitKeys(maxWait = timelimit_deci-target_durat, keyList =['1','2','escape'],timeStamped = True)
+            if keys is None:
+                RT = 'None'
+                keypress = 'None'
             #correct = 'False'
-            target_offset = target_onset+ timelimit_deci
+                target_offset = target_onset+ timelimit_deci
+            elif type(keys) is list:
+                if keys[0][0]=='escape':
+                    shutdown()
+            
+                else:
+                    keypress = keys[0][0]
+                    RT = keys[0][1] - target_onset
+                    #correct = (keys[0][0]==trial['correct_answer']) 
+                    target_offset = keys[0][1] 
+                    trial['RT']=RT
+                    #trial['correct'] = correct
+                    trial['KeyPress'] = keypress
 
             #write_trial(filename,headers,trial) 
 
@@ -382,12 +403,13 @@ def run_stimuli(stimuli_file):
                 trial['RT']=RT
                 #trial['correct'] = correct
                 trial['KeyPress'] = keypress
-       
+      
+        
         fix2.draw()
-        timetodraw = target_onset + target_durat
+        timetodraw = target_onset + timelimit_deci
         while core.monotonicClock.getTime() < (timetodraw - (1/120.0)):
             pass
-        fix2_onset = win.flip()                
+        fix2_onset = win.flip()          
                 
                 
         trial['trial_order_id']=trial_pres_num
