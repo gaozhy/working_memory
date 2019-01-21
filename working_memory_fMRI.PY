@@ -2,16 +2,15 @@
 """
 Created on Tue Jan  8 11:51:47 2019
 1: Task description:
-    The participants were asked to make the judgement about whether the two consective 
-word (probe first and target then) were semantic related or not.
+    A series of letters (range in 3~7) would present on the screen during probe. Then the participants 
+    were asked to make the judgement about two letters' position during target phase
 
 2: Slow event fMRI design, trial structure:
-    probe(2s), fix1(2s), target(2s,yes/no), fix2(6s).
+    probe(1s), fix1(2s), target(1s,yes/no; yes/no 2s), fix2(3s).
     
-3: 4 runs, each run with 45 trials
+3: 4 runs, each run with 30 trials
 
-4: conditions: Unrelated, Weak association, Medium association, Strong association. 
-    unr,60; wse,40; mse,40; sse,40.
+4: conditions: strings length range from 3~7. 5 conditions
     
 @author: zg750
 """
@@ -38,7 +37,7 @@ trigger_figure = 'trigger.png'
 ready_figure = 'ready.png'
 expName = 'Workingmemory'  # the experiment name
 data_folder = 'beh_results'  # make a directory to store data
-stimuli_name = 'run'
+stimuli_name = 'stim_run'
 constr=['B','F','H', 'J','L', 'M', 'Q', 'R', 'S', 'X','Y','Z']
 # assign the monitor name                                                                                                                                                                                                                                          
 monitor_name = 'HP ProOne 600'
@@ -48,6 +47,10 @@ win_size_x = 800
 win_size_y = 600
 
 # window background color
+white=(1,1,1);
+grey=(0,0,0)
+black=(-1,-1,-1)
+
 win_bg_col   = (1.0,1.0,1.0) # background color is black
 win_text_col = (-1,-1,-1)  # text color is white
 
@@ -126,8 +129,9 @@ def info_gui(expName):
   
 # creates a file with a name that is absolute path + info collected from GUI
     filename = data_folder + os.sep + '%s_%s_%s_%s.csv' %(expInfo['subjID'], expInfo['subjName'], expInfo['expdate'], expInfo['run'])
-    sample_file = stimuli_name +expInfo['run']+'.csv'
-    return expInfo, filename,stimuli_file
+    stimuli_file = stimuli_name +expInfo['run']+'.csv'
+    sample_file= expInfo['run']+'.csv'
+    return expInfo, filename,stimuli_file,sample_file
 
 
 # to avoid overwrite the data. Check whether the file exists, if not, create a new one and write the header.
@@ -146,13 +150,13 @@ def write_file_not_exist(filename):
 
 
 # Open a csv file, read through from the first row   # correct
-def load_csvs(filename):
-    with open(filename) as csvDataFile:
+def load_csvs(sample_file):
+    with open(sample_file) as csvDataFile:
         csvReader = csv.reader(csvDataFile)
-        trials=[]
+        samples=[]
         for row in csvReader:
-            trials.append(row)
-        return trials
+            samples.append(row)
+        return samples
     
 def load_conditions_dict(conditionfile):
 
