@@ -356,11 +356,11 @@ def run_stimuli(stimuli_file):
             probe.draw()
             
 
-        Is = prep_cont('Is',pos=(-260,0),text_h,win_text_col)
-        Targ1 = prep_cont(target1,pos=(-180,0),text_h,win_text_col)
-        Before = prep_cont('Before',pos=(-110,0),text_h,win_text_col)
-        Targ2 = prep_cont(target2,pos=(180,0),text_h,win_text_col)
-        Qsymb = prep_cont('?',pos=(250,0),text_h,win_text_col)
+        Is = prep_cont('Is',(-260,0),text_h,win_text_col)
+        Targ1 = prep_cont(target1,(-180,0),text_h,win_text_col)
+        Before = prep_cont('Before',(-110,0),text_h,win_text_col)
+        Targ2 = prep_cont(target2,(180,0),text_h,win_text_col)
+        Qsymb = prep_cont('?',(250,0),text_h,win_text_col)
         
 
         
