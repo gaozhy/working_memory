@@ -310,7 +310,9 @@ def run_stimuli(stimuli_file):
     samples=load_csvs(sample_file)
     all_trials,headers=load_conditions_dict(conditionfile=stimuli_file)
 
-    headers += ['trial_order_id','probe_onset','probe_durat', 'fixa1_onset', 'fixa1_durat', 'target_onset', 'target_durat','target_offset','fixa2_onset','fixa2_durat','RT', 'KeyPress'] 
+    headers += ['trial_order_id','probe_onset','probe_durat', 'fixa1_onset', 
+                'fixa1_durat', 'target_onset', 'target_durat','target_offset',
+                'fixa2_onset','fixa2_durat','RT', 'KeyPress','Correct_Key'] 
     
     # read the fixation duration
 #    all_fixa, fixa_headers = load_conditions_dict(conditionfile=fixa_file)
@@ -350,8 +352,12 @@ def run_stimuli(stimuli_file):
         tid1=int(trial['Targ1'])
         tid2=int(trial['Targ2'])
         levels=samples[trial_pres_num-1]
-        target1=constr[int(levels[tid1]-1)]
-        target2=constr[int(levels[tid2]-1)]
+        target1=constr[int(levels[tid1-1])-1]
+        target2=constr[int(levels[tid2-1])-1]
+        if int(levels[tid1-1])<int(levels[tid2-1]):
+            Correctness='1'
+        else:
+            Correctness='2'
         
         for p in range(level_id):
             
@@ -470,6 +476,7 @@ def run_stimuli(stimuli_file):
         trial['RT'] = RT
         #trial['correct'] = correct
         trial['KeyPress'] = keypress
+        trial['Correct_Key']=Correctness
         
         trial_pres_num +=1 # the number-th presentnted trial
         write_trial(filename,headers,trial)     # calls the function that writes csv output
