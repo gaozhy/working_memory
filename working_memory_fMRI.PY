@@ -310,7 +310,7 @@ def run_stimuli(stimuli_file):
     samples=load_csvs(sample_file)
     all_trials,headers=load_conditions_dict(conditionfile=stimuli_file)
 
-    headers += ['trial_order_id','probe_onset','probe_durat', 'fixa1_onset', 
+    headers += ['trial_order_id','strings','Tletter1','Tletter2','probe_onset','probe_durat', 'fixa1_onset', 
                 'fixa1_durat', 'target_onset', 'target_durat','target_offset',
                 'fixa2_onset','fixa2_durat','RT', 'KeyPress','Correct_Key'] 
     
@@ -359,7 +359,9 @@ def run_stimuli(stimuli_file):
         else:
             Correctness='2'
         
+        strings=[]
         for p in range(level_id):
+            strings+=constr[int(levels[p])-1]
             
             probe=visual.TextStim(win,constr[int(levels[p])-1],pos=(-400+p*(800/(level_id-1)),0),height=text_h,color=win_text_col)
             probe.draw()
@@ -464,6 +466,9 @@ def run_stimuli(stimuli_file):
                 
                 
         trial['trial_order_id']=trial_pres_num
+        trial['strings']=strings
+        trial['Tletter1']=target1
+        trial['Tletter2']=target2
         trial['fixa1_onset'] = fix1_onset - run_onset
         trial['fixa1_durat']= fix1_durat
         trial['probe_onset'] = probe_onset - run_onset
