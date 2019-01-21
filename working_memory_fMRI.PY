@@ -28,7 +28,9 @@ import csv
 import sys, os, errno # to get file system encoding (used in setDir())
 import numpy as np
 import random
+import scipy.io
 from collections import OrderedDict
+
 
 # Experiment constants
 instruct_figure = 'instruction.jpg'
@@ -36,8 +38,8 @@ trigger_figure = 'trigger.png'
 ready_figure = 'ready.png'
 expName = 'Workingmemory'  # the experiment name
 data_folder = 'beh_results'  # make a directory to store data
-stimuli_name = 'sem_stim_run'
-
+stimuli_name = 'run'
+constr=['B','F','H', 'J','L', 'M', 'Q', 'R', 'S', 'X','Y','Z']
 # assign the monitor name                                                                                                                                                                                                                                          
 monitor_name = 'HP ProOne 600'
 
@@ -124,7 +126,7 @@ def info_gui(expName):
   
 # creates a file with a name that is absolute path + info collected from GUI
     filename = data_folder + os.sep + '%s_%s_%s_%s.csv' %(expInfo['subjID'], expInfo['subjName'], expInfo['expdate'], expInfo['run'])
-    stimuli_file = stimuli_name +expInfo['run']+'.csv'
+    sample_file = stimuli_name +expInfo['run']+'.csv'
     return expInfo, filename,stimuli_file
 
 
@@ -144,6 +146,14 @@ def write_file_not_exist(filename):
 
 
 # Open a csv file, read through from the first row   # correct
+def load_csvs(filename):
+    with open(filename) as csvDataFile:
+        csvReader = csv.reader(csvDataFile)
+        trials=[]
+        for row in csvReader:
+            trials.append(row)
+        return trials
+    
 def load_conditions_dict(conditionfile):
 
 #load each row as a dictionary with the headers as the keys
@@ -161,7 +171,7 @@ def load_conditions_dict(conditionfile):
             trials.append(row)
     
     # save field names as a list in order
-        fieldnames = reader.fieldnames  # filenames is the first row, which used as keys of trials
+        #fieldnames = reader.fieldnames  # filenames is the first row, which used as keys of trials
 
     return trials, fieldnames   # trial is a list, each element is a key-value pair. Key is the 
                                 # header of that column and value is the corresponding value
@@ -219,6 +229,13 @@ def read_cont (filename):
 def prep_cont(line, pos, height,color):
     line_text = visual.TextStim(win,line,color=color,pos = pos,height = height)
     return line_text
+
+def prep_probe(stimuli_file):
+    mat = scipy.io.loadmat(stimuli_file)
+    target_sample=mat['target_sample']
+    level_id=mat['level_id']
+    constr=mat['constr']
+    
 
 def prep_fix1():
     draw_fix1=visual.Circle(win,units='pix',radius=30,fillColor=[0,0,0],lineColor=[0,0,0])
@@ -290,7 +307,9 @@ def run_stimuli(stimuli_file):
     
     """
     # read the stimuli  # re-define, not use numbers, but use keywords
-    all_trials, headers = load_conditions_dict(conditionfile=stimuli_file)
+    str_sample=load_csvs(sample_file)
+    all_trials,headers=load_conditions_dict(conditionfile=stimuli_file)
+
     headers += ['trial_order_id','probe_onset','probe_durat', 'fixa1_onset', 'fixa1_durat', 'target_onset', 'target_durat','target_offset','fixa2_onset','fixa2_durat','RT', 'KeyPress'] 
     
     # read the fixation duration
@@ -323,9 +342,28 @@ def run_stimuli(stimuli_file):
         # prepare fixation, clue, probe and target for dispaly
         
         fix  = prep_fix1()
+        
         fix2 = prep_cont('+',fix_pos,text_h,color = (-1,-1,-1))
-        probe = prep_cont(trial['probe'],probe_pos,text_h,win_text_col)
-        target = prep_cont(trial['target'],target_pos,text_h,win_text_col)
+        
+        
+        level_id=trial['Level']
+        target1=trial['Targ1']
+        target2=trial['Targ2']
+        
+        for p in range(level_id):
+            levels=str_sample[trial_pres_num-1]
+            probe=visual.TextStim(win,constr[levels[p]],pos=(-400+p*(800/(level_id-1)),0),height=text_h,color=win_text_col)
+            probe.draw()
+            
+
+        Is = prep_cont('Is',pos=(-260,0),text_h,win_text_col)
+        Targ1 = prep_cont(target1,pos=(-180,0),text_h,win_text_col)
+        Before = prep_cont('Before',pos=(-110,0),text_h,win_text_col)
+        Targ2 = prep_cont(target2,pos=(180,0),text_h,win_text_col)
+        Qsymb = prep_cont('?',pos=(250,0),text_h,win_text_col)
+        
+
+        
         yes   = prep_cont('Y',yes_pos,yes_no_h,win_text_col)
         no    = prep_cont('N',no_pos,yes_no_h,win_text_col)
 
@@ -333,7 +371,7 @@ def run_stimuli(stimuli_file):
         
         
          # draw probe and filp the window
-        probe.draw()
+        #probe.draw()
 
         while core.monotonicClock.getTime() < (run_onset + trial_duration*(trial_pres_num-1) - (1/120.0)):
             pass       
@@ -347,7 +385,11 @@ def run_stimuli(stimuli_file):
         fix1_onset = win.flip()
         
         # draw target and flip the window           
-        target.draw()
+        Is.draw()
+        Targ1.draw()
+        Before.draw()
+        Targ2.draw()
+        Qsymb.draw()
         yes.draw()
         no.draw()
         timetodraw = fix1_onset + fix1_durat
