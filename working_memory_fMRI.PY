@@ -50,6 +50,7 @@ win_size_y = 600
 white=(1,1,1);
 grey=(0,0,0)
 black=(-1,-1,-1)
+red=(1,-1,-1)
 
 win_bg_col   = (1.0,1.0,1.0) # background color is black
 win_text_col = (-1,-1,-1)  # text color is white
@@ -130,7 +131,7 @@ def info_gui(expName):
 # creates a file with a name that is absolute path + info collected from GUI
     filename = data_folder + os.sep + '%s_%s_%s_%s.csv' %(expInfo['subjID'], expInfo['subjName'], expInfo['expdate'], expInfo['run'])
     stimuli_file = stimuli_name +expInfo['run']+'.csv'
-    sample_file= expInfo['run']+'.csv'
+    sample_file= 'run'+expInfo['run']+'.csv'
     return expInfo, filename,stimuli_file,sample_file
 
 
@@ -175,7 +176,7 @@ def load_conditions_dict(conditionfile):
             trials.append(row)
     
     # save field names as a list in order
-        #fieldnames = reader.fieldnames  # filenames is the first row, which used as keys of trials
+        fieldnames = reader.fieldnames  # filenames is the first row, which used as keys of trials
 
     return trials, fieldnames   # trial is a list, each element is a key-value pair. Key is the 
                                 # header of that column and value is the corresponding value
@@ -234,11 +235,6 @@ def prep_cont(line, pos, height,color):
     line_text = visual.TextStim(win,line,color=color,pos = pos,height = height)
     return line_text
 
-def prep_probe(stimuli_file):
-    mat = scipy.io.loadmat(stimuli_file)
-    target_sample=mat['target_sample']
-    level_id=mat['level_id']
-    constr=mat['constr']
     
 
 def prep_fix1():
@@ -311,7 +307,7 @@ def run_stimuli(stimuli_file):
     
     """
     # read the stimuli  # re-define, not use numbers, but use keywords
-    str_sample=load_csvs(sample_file)
+    samples=load_csvs(sample_file)
     all_trials,headers=load_conditions_dict(conditionfile=stimuli_file)
 
     headers += ['trial_order_id','probe_onset','probe_durat', 'fixa1_onset', 'fixa1_durat', 'target_onset', 'target_durat','target_offset','fixa2_onset','fixa2_durat','RT', 'KeyPress'] 
@@ -350,21 +346,24 @@ def run_stimuli(stimuli_file):
         fix2 = prep_cont('+',fix_pos,text_h,color = (-1,-1,-1))
         
         
-        level_id=trial['Level']
-        target1=trial['Targ1']
-        target2=trial['Targ2']
+        level_id=int(trial['Level'])
+        tid1=int(trial['Targ1'])
+        tid2=int(trial['Targ2'])
+        levels=samples[trial_pres_num-1]
+        target1=constr[int(levels[tid1]-1)]
+        target2=constr[int(levels[tid2]-1)]
         
         for p in range(level_id):
-            levels=str_sample[trial_pres_num-1]
-            probe=visual.TextStim(win,constr[levels[p]],pos=(-400+p*(800/(level_id-1)),0),height=text_h,color=win_text_col)
+            
+            probe=visual.TextStim(win,constr[int(levels[p])-1],pos=(-400+p*(800/(level_id-1)),0),height=text_h,color=win_text_col)
             probe.draw()
             
 
-        Is = prep_cont('Is',(-260,0),text_h,win_text_col)
-        Targ1 = prep_cont(target1,(-180,0),text_h,win_text_col)
-        Before = prep_cont('Before',(-110,0),text_h,win_text_col)
-        Targ2 = prep_cont(target2,(180,0),text_h,win_text_col)
-        Qsymb = prep_cont('?',(250,0),text_h,win_text_col)
+        Is = prep_cont('Is',(-250,0),text_h,win_text_col)
+        Targ1 = prep_cont(target1,(-155,0),text_h,red)
+        Before = prep_cont('Before',(0,0),text_h,win_text_col)
+        Targ2 = prep_cont(target2,(170,0),text_h,red)
+        Qsymb = prep_cont('?',(240,0),text_h,win_text_col)
         
 
         
@@ -487,7 +486,7 @@ curr_dic = get_pwd()
 makedir(data_folder)
 
 # record subjects info and create a csv file with the info about subjects
-expInfo, filename, stimuli_file = info_gui(expName)
+expInfo, filename, stimuli_file,sample_file = info_gui(expName)
 
 # if the data does not exist, create one, otherwise,  rename one –filename-repeat-n
 write_file_not_exist(filename)
